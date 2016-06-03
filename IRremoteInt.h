@@ -117,13 +117,13 @@
 // SA 8650B
 #define SANYO_HDR_MARK	3500  // seen range 3500
 #define SANYO_HDR_SPACE	950 //  seen 950
-#define SANYO_ONE_MARK	2400 // seen 2400  
+#define SANYO_ONE_MARK	2400 // seen 2400
 #define SANYO_ZERO_MARK 700 //  seen 700
 #define SANYO_DOUBLE_SPACE_USECS  800  // usually ssee 713 - not using ticks as get number wrapround
 #define SANYO_RPT_LENGTH 45000
 
 // Mitsubishi RM 75501
-// 14200 7 41 7 42 7 42 7 17 7 17 7 18 7 41 7 18 7 17 7 17 7 18 7 41 8 17 7 17 7 18 7 17 7 
+// 14200 7 41 7 42 7 42 7 17 7 17 7 18 7 41 7 18 7 17 7 17 7 18 7 41 8 17 7 17 7 18 7 17 7
 
 // #define MITSUBISHI_HDR_MARK	250  // seen range 3500
 #define MITSUBISHI_HDR_SPACE	350 //  7*50+100
@@ -173,8 +173,8 @@
 #define DISH_BITS 16
 
 #define TOLERANCE 25  // percent tolerance in measurements
-#define LTOL (1.0 - TOLERANCE/100.) 
-#define UTOL (1.0 + TOLERANCE/100.) 
+#define LTOL (1.0 - TOLERANCE/100.)
+#define UTOL (1.0 + TOLERANCE/100.)
 
 #define _GAP 5000 // Minimum map between transmissions
 #define GAP_TICKS (_GAP/USECPERTICK)
@@ -182,7 +182,7 @@
 #define TICKS_LOW(us) (int) (((us)*LTOL/USECPERTICK))
 #define TICKS_HIGH(us) (int) (((us)*UTOL/USECPERTICK + 1))
 
-#ifndef DEBUG
+#if(!DEBUG)
 int MATCH(int measured, int desired) {return measured >= TICKS_LOW(desired) && measured <= TICKS_HIGH(desired);}
 int MATCH_MARK(int measured_ticks, int desired_us) {return MATCH(measured_ticks, (desired_us + MARK_EXCESS));}
 int MATCH_SPACE(int measured_ticks, int desired_us) {return MATCH(measured_ticks, (desired_us - MARK_EXCESS));}
@@ -203,7 +203,7 @@ typedef struct {
   unsigned int timer;     // state timer, counts 50uS ticks.
   unsigned int rawbuf[RAWBUF]; // raw data
   uint8_t rawlen;         // counter of entries in rawbuf
-} 
+}
 irparams_t;
 
 // Defined in IRremote.cpp
