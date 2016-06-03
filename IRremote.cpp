@@ -18,6 +18,7 @@
 
 #if defined (PARTICLE)
   #include "application.h"
+  #include "SparkIntervalTimer.h"
   int irout_khz;
 #else
 // Provides ISR
@@ -151,7 +152,7 @@ int MATCH_SPACE(int measured_ticks, int desired_us) {
   }
 }
 
-Timer timer(50, timer_isr);
+IntervalTimer timer;
 
 void IRsend::sendNEC(unsigned long data, int nbits)
 {
@@ -337,7 +338,7 @@ void IRsend::enableIROut(int khz) {
   
   // Disable the Timer2 Interrupt (which is used for receiving IR)
   #if defined(PARTICLE)
-    timer.stop();
+    timer.end();
     irout_khz = khz;
   #else
     TIMER_DISABLE_INTR; //Timer2 Overflow Interrupt
@@ -364,7 +365,7 @@ IRrecv::IRrecv(int recvpin)
 // initialization
 void IRrecv::enableIRIn() {
   #if defined(PARTICLE)
-  timer.reset();
+  timer.begin(timer_isr, 50, uSec);
   #else
   cli();
   // setup pulse clock timer interrupt
