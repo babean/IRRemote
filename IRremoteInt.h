@@ -485,14 +485,14 @@ extern volatile irparams_t irparams;
 
 // defines for special carrier modulator timer
 #elif defined(IR_USE_TIMER_PARTICLE)
-#define TIMER_PWM_PIN        5
-#define TIMER_ENABLE_PWM     digitalWrite(TIMER_PWM_PIN, 0)
-#define TIMER_DISABLE_PWM    digitalWrite(TIMER_PWM_PIN, 0)
+#define TIMER_PWM_PIN        A5
+#define TIMER_ENABLE_PWM     analogWrite(TIMER_PWM_PIN, 128, irout_khz*1000)
+#define TIMER_DISABLE_PWM    analogWrite(TIMER_PWM_PIN, 0, irout_khz*1000)
 #ifdef ISR
 #undef ISR
 #endif
 #define TIMER_CONFIG_KHZ(val) ({  \
-  analogWrite(TIMER_PWM_PIN, 128, val*1000); \
+  pinMode(TIMER_PWM_PIN, OUTPUT); \
 })
 #else // unknown timer
 #error "Internal code configuration error, no known IR_USE_TIMER# defined\n"

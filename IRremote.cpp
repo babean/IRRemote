@@ -18,6 +18,7 @@
 
 #if defined (PARTICLE)
   #include "application.h"
+  int irout_khz;
 #else
 // Provides ISR
 #include <avr/interrupt.h>
@@ -337,6 +338,7 @@ void IRsend::enableIROut(int khz) {
   // Disable the Timer2 Interrupt (which is used for receiving IR)
   #if defined(PARTICLE)
     timer.stop();
+    irout_khz = khz;
   #else
     TIMER_DISABLE_INTR; //Timer2 Overflow Interrupt
   #endif
