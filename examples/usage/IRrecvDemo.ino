@@ -6,11 +6,7 @@
  * http://arcfn.com
  */
 
-#if defined (PARTICLE)
-#include "application.h"
-#endif
-
-#include <IRremote.h>
+#include "IRremote.h"
 
 int RECV_PIN = 11;
 

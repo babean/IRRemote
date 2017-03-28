@@ -16,14 +16,11 @@
  * JVC and Panasonic protocol added by Kristian Lauszus (Thanks to zenwheel and other people at the original blog post)
  */
 
-#if defined (PARTICLE)
-  #include "application.h"
-  #include "SparkIntervalTimer.h"
-  int irout_khz;
-#else
-// Provides ISR
-#include <avr/interrupt.h>
-#endif
+ #if defined (PARTICLE)
+   #include "application.h"
+   #include "SparkIntervalTimer.h"
+   int irout_khz;
+ #endif
 
 #include "IRremote.h"
 #include "IRremoteInt.h"

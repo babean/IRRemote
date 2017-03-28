@@ -14,10 +14,14 @@
 
 #ifndef IRremote_h
 #define IRremote_h
- 
-#if defined (PARTICLE)
-#include "application.h"
-#endif
+
+#pragma once
+
+/* spektrumsat library by Michael Doan
+ */
+
+// This will load the definition for common Particle variable types
+#include "Particle.h"
 
 // The following are compile-time library options.
 // If you change them, recompile the library.
@@ -77,7 +81,7 @@ private:
   long decodeHash(decode_results *results);
   int compare(unsigned int oldval, unsigned int newval);
 
-} 
+}
 ;
 
 // Only used for testing; can remove virtual for shorter code
